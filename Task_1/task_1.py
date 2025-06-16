@@ -46,5 +46,4 @@ def test_days_until():
 if __name__ == "__main__":
     test_days_until()
     print("✅ Test passed!")
-
-run()
+    run()
