@@ -1,11 +1,11 @@
-import datetime
+from datetime import datetime, date, timedelta
 
 DATE_FORMAT = "%Y-%m-%d"
 
-def days_until(date: str):
-    today = datetime.datetime.today()
-    date = datetime.datetime.strptime(date, DATE_FORMAT)
-    return (today - date).days
+def get_days_from_today(date_str: str):
+    today = datetime.today()
+    target_date = datetime.strptime(date_str, DATE_FORMAT)
+    return (today - target_date).days
 
 def get_valid_int(prompt: str, min_val: int, max_val: int):
     while True:
@@ -25,21 +25,21 @@ def run():
     while True:
         day = get_valid_int("Enter day (1–31): ", min_val=1, max_val=31)
         try:
-            datetime_obj = datetime.date(year, month, day)
+            datetime_obj = date(year, month, day)
             date_str = datetime_obj.strftime(DATE_FORMAT)
             print(f"\nYou entered: {date_str} "
-                  f"\nTime until that date: {days_until(date_str)} days")
+                  f"\nTime until that date: {get_days_from_today(date_str)} days")
             break
         except ValueError:
             print("Invalid day for the given month/year. Try again.")
 
 def test_days_until():
-    today = datetime.datetime.today().date()
-    future_date = today + datetime.timedelta(days=1)
-    past_date = today - datetime.timedelta(days=1)
+    today = date.today()
+    future_date = today + timedelta(days=1)
+    past_date = today - timedelta(days=1)
 
-    days_to_future = days_until(future_date.strftime(DATE_FORMAT))
-    days_to_past = days_until(past_date.strftime(DATE_FORMAT))
+    days_to_future = get_days_from_today(future_date.strftime(DATE_FORMAT))
+    days_to_past = get_days_from_today(past_date.strftime(DATE_FORMAT))
     assert days_to_future < 0, f"Expected negative timedelta, got {days_to_future}"
     assert days_to_past > 0, f"Expected positive timedelta, got {days_to_past}"
 
