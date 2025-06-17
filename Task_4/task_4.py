@@ -40,8 +40,9 @@ def get_upcoming_birthdays(user_birthdays):
 
 users = [
     {"name": "John Doe", "birthday": "1985.06.18"},
-    {"name": "Jane Smith", "birthday": "1990.06.22"}
+    {"name": "Jane Smith", "birthday": "1990.06.22"},
 ]
 
-upcoming_birthdays = get_upcoming_birthdays(users)
-print("Список привітань:", upcoming_birthdays)
+if __name__ == "__main__":
+    upcoming_birthdays = get_upcoming_birthdays(users)
+    print("Список привітань:", upcoming_birthdays)

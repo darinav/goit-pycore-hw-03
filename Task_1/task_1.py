@@ -1,15 +1,20 @@
-from datetime import datetime, date, timedelta, timezone
-from zoneinfo import ZoneInfo
+from datetime import datetime, date, timedelta
 
 DATE_FORMAT = "%Y-%m-%d"
 
 def get_days_from_today(date_str: str):
-    today = datetime.today()
-    today_today = datetime.today()
-    today_now = datetime.now(timezone.utc)
-    today_now_here = datetime.now(ZoneInfo("Europe/Kyiv"))
-    print(f"{today_today.time()} *** {today_now.time()} *** {today_now_here.time()}")
-    target_date = datetime.strptime(date_str, DATE_FORMAT)
+    """Return the number of days between ``date_str`` and today.
+
+    If ``date_str`` has incorrect format the function returns ``None``.
+    Only the date part of ``datetime`` objects is used in the calculation so
+    the time of day does not affect the result.
+    """
+    try:
+        today = date.today()
+        target_date = datetime.strptime(date_str, DATE_FORMAT).date()
+    except ValueError:
+        return None
+
     return (today - target_date).days
 
 def get_valid_int(prompt: str, min_val: int, max_val: int):
