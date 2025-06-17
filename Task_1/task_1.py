@@ -1,9 +1,14 @@
-from datetime import datetime, date, timedelta
+from datetime import datetime, date, timedelta, timezone
+from zoneinfo import ZoneInfo
 
 DATE_FORMAT = "%Y-%m-%d"
 
 def get_days_from_today(date_str: str):
     today = datetime.today()
+    today_today = datetime.today()
+    today_now = datetime.now(timezone.utc)
+    today_now_here = datetime.now(ZoneInfo("Europe/Kyiv"))
+    print(f"{today_today.time()} *** {today_now.time()} *** {today_now_here.time()}")
     target_date = datetime.strptime(date_str, DATE_FORMAT)
     return (today - target_date).days
 
