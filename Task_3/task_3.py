@@ -4,6 +4,7 @@ normalization_pattern = r"[^\d+]"
 
 def normalize_phone(phone_number: str):
     normalized_phone = re.sub(normalization_pattern, "", phone_number)
+
     if normalized_phone.startswith("+"):
         return normalized_phone
     elif normalized_phone.startswith("380"):
@@ -23,5 +24,6 @@ raw_numbers = [
     "38050 111 22 11   ",
 ]
 
-sanitized_numbers = [normalize_phone(num) for num in raw_numbers]
-print("Нормалізовані номери:", sanitized_numbers)
+if __name__ == "__main__":
+    sanitized_numbers = [normalize_phone(num) for num in raw_numbers]
+    print("Нормалізовані номери:", sanitized_numbers)
